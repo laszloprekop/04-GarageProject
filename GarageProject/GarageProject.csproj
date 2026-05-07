@@ -9,7 +9,6 @@
 
     <ItemGroup>
       <Folder Include="Application\" />
-      <Folder Include="Docs\" />
       <Folder Include="Material\" />
       <Folder Include="UI\" />
     </ItemGroup>
