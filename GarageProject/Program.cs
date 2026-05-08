@@ -1,5 +1,6 @@
 ﻿using Terminal.Gui.App;
+using GarageProject.UI;
 
 Application.Init();
-Application.Run();
+Application.Run(new GarageApp());
 Application.Shutdown();
