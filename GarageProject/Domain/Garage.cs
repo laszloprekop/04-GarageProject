@@ -1,6 +1,6 @@
 namespace GarageProject.Domain;
 
-public class Garage
+public class Garage<T> where T : Vehicle
 {
     private readonly T?[] _vehicles;
     public int Capacity { get; }
