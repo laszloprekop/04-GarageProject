@@ -17,4 +17,8 @@ public class GarageHandler
     // TODO - add get by registration number, type, color, number of wheels, fuel type
     
     // TODO - mock data?
+    public void Populate()
+    {
+        throw new NotImplementedException();
+    }
 }
