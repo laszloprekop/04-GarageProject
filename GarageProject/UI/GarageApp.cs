@@ -17,7 +17,7 @@ public class GarageApp : Window
     public GarageApp()
     {
         _garageHandler = new GarageHandler();
-        _garageHandler.CreateGarage(10);
+        _garageHandler.CreateGarage(15);
         _garageHandler.Populate();
 
         Add(BuildMenubar());
