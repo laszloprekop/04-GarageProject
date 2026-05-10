@@ -21,7 +21,7 @@ public class GarageApp : Window
         _garageHandler.Populate();
 
         Add(BuildMenubar());
-//        Add(BuildTitleBar());
+        Add(BuildTitleBar());
         Add(BuildTable());
         Add(BuildStatusLine());
         Add(BuildStatusBar());
@@ -79,10 +79,16 @@ public class GarageApp : Window
     }
 
 
-    private View BuildTitleBar()
+    private Label BuildTitleBar() => new()
     {
-        throw new NotImplementedException();
-    }
+        X = 0, Y = 1,
+        Width = Dim.Fill(),
+        Text = TitleText(),
+        SchemeName = "Accent",
+    };
+
+    private string TitleText() =>
+        $"GARAGE Project 1.0 - {_garageHandler.GetAll().Count()} / {_garageHandler.Capacity} spaces used";
 
     private MenuBar BuildMenubar() => new()
     {
