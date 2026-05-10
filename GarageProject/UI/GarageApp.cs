@@ -50,12 +50,20 @@ public class GarageApp : Window
             .Aggregate((a, b) => $"{a} | {b}");
 
     private StatusBar BuildStatusBar() => new([
-            new Shortcut(Key.F3, "Park", ShowAddDialog),
-            new Shortcut(Key.F4, "Unpark", RemoveSelected),
-            new Shortcut(Key.F5, "Search", ShowSearchDialog),
-            new Shortcut(Key.F10, "Quit", RequestStop),
+            new Shortcut(Key.F3,  "Park",   ShowAddDialog),
+            new Shortcut(Key.F4,  "Unpark", RemoveSelected),
+            new Shortcut(Key.F5,  "Search", ShowSearchDialog),
+            new Shortcut(Key.F10, "Quit",   RequestStop),
         ]
     );
+
+    protected override bool OnKeyDown(Key key)
+    {
+        if (key == Key.N.WithCtrl) { ShowAddDialog();   return true; }
+        if (key == Key.D.WithCtrl) { RemoveSelected();  return true; }
+        if (key == Key.Q.WithCtrl) { RequestStop();     return true; }
+        return base.OnKeyDown(key);
+    }
 
 
     private View BuildStatusLine()
