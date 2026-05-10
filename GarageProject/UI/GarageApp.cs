@@ -78,7 +78,6 @@ public class GarageApp : Window
         return _tableView;
     }
 
-
     private Label BuildTitleBar() => new()
     {
         X = 0, Y = 1,

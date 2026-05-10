@@ -24,6 +24,12 @@ public class GarageHandler
     public Vehicle? FindByRegistrationNumber(string registrationNumber) =>
         _garage?.Find(registrationNumber);
 
+    public IEnumerable<Vehicle> Filter(string? type, string? color, int? minWheels) =>
+        GetAll().Where(v =>
+            (string.IsNullOrEmpty(type) || v.GetType().Name.Equals(type, StringComparison.OrdinalIgnoreCase)) &&
+            (string.IsNullOrEmpty(color) || v.Color.Contains(color, StringComparison.OrdinalIgnoreCase)) &&
+            (minWheels is null || v.NumberOfWheels >= minWheels));
+
     public void Populate()
     {
         ParkVehicle(new Car("ABC123", "Red", 4, FuelType.Gasoline));
