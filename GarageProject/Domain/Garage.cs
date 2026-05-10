@@ -33,11 +33,6 @@ public class Garage<T> : IEnumerable<T> where T : Vehicle
         return false;
     }
 
-    public IEnumerator<T> GetEnumerator() =>
-        _vehicles.OfType<T>().GetEnumerator();
-
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
     public T? Remove(string registrationNumber)
     {
         for (var i = 0; i < _vehicles.Length; i++)
@@ -52,4 +47,13 @@ public class Garage<T> : IEnumerable<T> where T : Vehicle
 
         return null;
     }
+
+    public T? Find(string registrationNumber) =>
+        _vehicles.FirstOrDefault(v =>
+            v?.RegistrationNumber.Equals(registrationNumber, StringComparison.OrdinalIgnoreCase) == true);
+
+    public IEnumerator<T> GetEnumerator() =>
+        _vehicles.OfType<T>().GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
