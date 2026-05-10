@@ -1,6 +1,8 @@
+using System.Collections;
+
 namespace GarageProject.Domain;
 
-public class Garage<T> where T : Vehicle
+public class Garage<T> : IEnumerable<T> where T : Vehicle
 {
     private readonly T?[] _vehicles;
     public int Capacity { get; }
@@ -30,4 +32,9 @@ public class Garage<T> where T : Vehicle
 
         return false;
     }
+
+    public IEnumerator<T> GetEnumerator() =>
+        _vehicles.OfType<T>().GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

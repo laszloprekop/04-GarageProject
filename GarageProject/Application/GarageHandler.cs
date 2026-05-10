@@ -11,11 +11,13 @@ public class GarageHandler
     public void CreateGarage(int capacity) =>
         _garage = new Garage<Vehicle>(capacity);
 
-    private bool ParkVehicle(Vehicle vehicle) =>
-        _garage?.Add(vehicle) ?? false;
-    
-    // TODO - add retrieving
-    // TODO - add get all vehicles
+    public bool ParkVehicle(Vehicle vehicle) => _garage?.Add(vehicle) ?? false;
+
+    // TODO - add removing
+
+    public IEnumerable<Vehicle> GetAll() =>
+        _garage ?? Enumerable.Empty<Vehicle>();
+
     // TODO - add get by registration number, type, color, number of wheels, fuel type
 
     // TODO - mock data?
