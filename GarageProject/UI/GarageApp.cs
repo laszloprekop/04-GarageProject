@@ -2,6 +2,7 @@ using System.Data;
 using GarageProject.Application;
 using GarageProject.Domain;
 using Terminal.Gui.App;
+using Terminal.Gui.Input;
 using Terminal.Gui.ViewBase;
 using Terminal.Gui.Views;
 
@@ -23,7 +24,7 @@ public class GarageApp : Window
 //        Add(BuildTitleBar());
         Add(BuildTable());
         Add(BuildStatusLine());
-//        Add(BuildStatusBar());
+        Add(BuildStatusBar());
 
         RefreshTable();
     }
@@ -48,10 +49,14 @@ public class GarageApp : Window
             .DefaultIfEmpty("Empty garage")
             .Aggregate((a, b) => $"{a} | {b}");
 
-    private View BuildStatusBar()
-    {
-        throw new NotImplementedException();
-    }
+    private StatusBar BuildStatusBar() => new([
+            new Shortcut(Key.F3, "Park", () => ShowAddDialog()),
+            new Shortcut(Key.F4, "Unpark", () => RemoveSelected()),
+            new Shortcut(Key.F5, "Search", () => ShowSearchDialog()),
+            new Shortcut(Key.F10, "Quit", () => RequestStop()),
+        ]
+    );
+
 
     private View BuildStatusLine()
     {
@@ -80,6 +85,26 @@ public class GarageApp : Window
     }
 
     private View BuildMenubar()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ShowAddDialog()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ShowSearchDialog()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ShowFilterDialog()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void RemoveSelected()
     {
         throw new NotImplementedException();
     }
