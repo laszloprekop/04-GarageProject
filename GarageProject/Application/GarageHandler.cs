@@ -35,6 +35,7 @@ public class GarageHandler
         ParkVehicle(new Bus("STU654", "Bronze", 4, 44));
         ParkVehicle(new Airplane("FGH678", "Chrome", 8, 2 , FuelType.Other));
         ParkVehicle(new Airplane("KLM098", "White", 8, 4, FuelType.Hybrid));
-        // ParkVehicle(new Boat("JKL321", "Red", 4, FuelType.Diesel));
+        ParkVehicle(new Boat("JKL321", "White", 4, 5));
+        ParkVehicle(new Boat("VWX567", "Orange", 4, 12));
     }
 }
