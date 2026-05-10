@@ -88,7 +88,7 @@ public class GarageApp : Window
     };
 
     private string TitleText() =>
-        $"GARAGE Project 1.0 - {_garageHandler.GetAll().Count()} / {_garageHandler.Capacity} spaces used";
+        $"GARAGE Project v1.0 - {_garageHandler.GetAll().Count()}/{_garageHandler.Capacity} spaces used";
 
     private MenuBar BuildMenubar() => new()
     {
