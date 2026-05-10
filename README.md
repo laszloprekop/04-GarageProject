@@ -1,5 +1,7 @@
 # Garage 1.0
 
+![demo](demo.gif)
+
 A console application that simulates a simple garage. Park, retrieve, list, and search vehicles through a terminal UI.
 
 ## Requirements
