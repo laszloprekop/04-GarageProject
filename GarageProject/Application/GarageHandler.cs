@@ -20,6 +20,9 @@ public class GarageHandler
 
     // TODO - add get by registration number, type, color, number of wheels, fuel type
 
+    public IEnumerable<IGrouping<string, Vehicle>> GetByType() =>
+        GetAll().GroupBy(v => v.GetType().Name);
+
     // TODO - mock data?
     public void Populate()
     {

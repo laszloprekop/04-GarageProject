@@ -22,7 +22,7 @@ public class GarageApp : Window
 //        Add(BuildMenubar());
 //        Add(BuildTitleBar());
         Add(BuildTable());
-//        Add(BuildStatusLine());
+        Add(BuildStatusLine());
 //        Add(BuildStatusBar());
 
         RefreshTable();
@@ -39,7 +39,14 @@ public class GarageApp : Window
         foreach (var v in _garageHandler.GetAll())
             table.Rows.Add(v.RegistrationNumber, v.GetType().Name, v.Color, v.NumberOfWheels);
         _tableView.Table = new DataTableSource(table);
+        _statusLabel.Text = StatusText();
     }
+
+    private string StatusText() =>
+        _garageHandler.GetByType()
+            .Select(g => $"{g.Key}: {g.Count()}")
+            .DefaultIfEmpty("Empty garage")
+            .Aggregate((a, b) => $"{a} | {b}");
 
     private View BuildStatusBar()
     {
@@ -48,7 +55,8 @@ public class GarageApp : Window
 
     private View BuildStatusLine()
     {
-        throw new NotImplementedException();
+        _statusLabel = new Label { X = 0, Y = Pos.AnchorEnd(2), Width = Dim.Fill() };
+        return _statusLabel;
     }
 
     private TableView BuildTable()
