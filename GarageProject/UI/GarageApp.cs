@@ -50,10 +50,10 @@ public class GarageApp : Window
             .Aggregate((a, b) => $"{a} | {b}");
 
     private StatusBar BuildStatusBar() => new([
-            new Shortcut(Key.F3, "Park", () => ShowAddDialog()),
-            new Shortcut(Key.F4, "Unpark", () => RemoveSelected()),
-            new Shortcut(Key.F5, "Search", () => ShowSearchDialog()),
-            new Shortcut(Key.F10, "Quit", () => RequestStop()),
+            new Shortcut(Key.F3, "Park", ShowAddDialog),
+            new Shortcut(Key.F4, "Unpark", RemoveSelected),
+            new Shortcut(Key.F5, "Search", ShowSearchDialog),
+            new Shortcut(Key.F10, "Quit", RequestStop),
         ]
     );
 
