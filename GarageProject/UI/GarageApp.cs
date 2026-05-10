@@ -1,10 +1,10 @@
 using System.Data;
 using GarageProject.Application;
 using GarageProject.Domain;
-using Terminal.Gui.App;
 using Terminal.Gui.Input;
 using Terminal.Gui.ViewBase;
 using Terminal.Gui.Views;
+using TGui = Terminal.Gui.App.Application;
 
 namespace GarageProject.UI;
 
@@ -110,7 +110,8 @@ public class GarageApp : Window
 
     private void ShowAddDialog()
     {
-        throw new NotImplementedException();
+        var dialog = new AddVehicleDialog(_garageHandler, RefreshTable);
+        App!.Run(dialog, ex => false);
     }
 
     private void ShowSearchDialog()
