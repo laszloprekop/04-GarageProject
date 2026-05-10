@@ -1,3 +1,4 @@
+using System.Data;
 using GarageProject.Application;
 using GarageProject.Domain;
 using Terminal.Gui.App;
@@ -18,18 +19,26 @@ public class GarageApp : Window
         _garageHandler.CreateGarage(10);
         _garageHandler.Populate();
 
-        Add(BuildMenubar());
-        Add(BuildTitleBar());
+//        Add(BuildMenubar());
+//        Add(BuildTitleBar());
         Add(BuildTable());
-        Add(BuildStatusLine());
-        Add(BuildStatusBar());
+//        Add(BuildStatusLine());
+//        Add(BuildStatusBar());
 
         RefreshTable();
     }
 
     private void RefreshTable()
     {
-        throw new NotImplementedException();
+        var table = new DataTable();
+        table.Columns.Add("Reg. No");
+        table.Columns.Add("Type");
+        table.Columns.Add("Color");
+        table.Columns.Add("Wheels");
+
+        foreach (var v in _garageHandler.GetAll())
+            table.Rows.Add(v.RegistrationNumber, v.GetType().Name, v.Color, v.NumberOfWheels);
+        _tableView.Table = new DataTableSource(table);
     }
 
     private View BuildStatusBar()
@@ -42,10 +51,20 @@ public class GarageApp : Window
         throw new NotImplementedException();
     }
 
-    private View BuildTable()
+    private TableView BuildTable()
     {
-        throw new NotImplementedException();
+        _tableView = new TableView
+        {
+            X = 0, Y = 2,
+            Width = Dim.Fill(),
+            Height = Dim.Fill(2),
+            FullRowSelect = true,
+        };
+        _tableView.Style.ShowHorizontalHeaderUnderline = true;
+        _tableView.Style.ShowVerticalCellLines = true;
+        return _tableView;
     }
+
 
     private View BuildTitleBar()
     {
