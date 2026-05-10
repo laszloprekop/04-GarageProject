@@ -31,6 +31,8 @@ public class GarageHandler
         ParkVehicle(new Car("GHI789", "Blue", 4, FuelType.Electric));
         ParkVehicle(new Motorcycle("XYZ789", "Blue", 2, FuelType: FuelType.Gasoline, cylinderVolume: 1.6));
         ParkVehicle(new Motorcycle("PQR012", "Red", 2, FuelType.Gasoline, cylinderVolume: 1.8));
+        ParkVehicle(new Bus("MNO987", "Silver", 4, 18));
+        ParkVehicle(new Bus("STU654", "Bronze", 4, 44));
         // ParkVehicle(new Boat("JKL321", "Red", 4, FuelType.Diesel));
     }
 }
