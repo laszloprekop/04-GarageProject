@@ -37,4 +37,19 @@ public class Garage<T> : IEnumerable<T> where T : Vehicle
         _vehicles.OfType<T>().GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    public T? Remove(string registrationNumber)
+    {
+        for (var i = 0; i < _vehicles.Length; i++)
+        {
+            if (_vehicles[i]?.RegistrationNumber.Equals(registrationNumber, StringComparison.OrdinalIgnoreCase) == true)
+            {
+                var removed = _vehicles[i];
+                _vehicles[i] = null;
+                return removed;
+            }
+        }
+
+        return null;
+    }
 }

@@ -126,6 +126,13 @@ public class GarageApp : Window
 
     private void RemoveSelected()
     {
-        throw new NotImplementedException();
+        if (_tableView.Table is null || _tableView.Table.Rows == 0) return;
+        if (_tableView.Value != null)
+        {
+            var row = _tableView.Value.Cursor.Y;
+            var reg = _tableView.Table[row, 0].ToString()!;
+            var removed = _garageHandler.RemoveVehicle(reg);
+            if (removed is not null) RefreshTable();
+        }
     }
 }

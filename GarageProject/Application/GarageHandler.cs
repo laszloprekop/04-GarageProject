@@ -13,7 +13,7 @@ public class GarageHandler
 
     public bool ParkVehicle(Vehicle vehicle) => _garage?.Add(vehicle) ?? false;
 
-    // TODO - add removing
+    public Vehicle? RemoveVehicle(string registrationNumber) => _garage?.Remove(registrationNumber);
 
     public IEnumerable<Vehicle> GetAll() =>
         _garage ?? Enumerable.Empty<Vehicle>();
