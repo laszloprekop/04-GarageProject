@@ -20,7 +20,7 @@ public class GarageApp : Window
         _garageHandler.CreateGarage(10);
         _garageHandler.Populate();
 
-//        Add(BuildMenubar());
+        Add(BuildMenubar());
 //        Add(BuildTitleBar());
         Add(BuildTable());
         Add(BuildStatusLine());
@@ -84,10 +84,24 @@ public class GarageApp : Window
         throw new NotImplementedException();
     }
 
-    private View BuildMenubar()
+    private MenuBar BuildMenubar() => new()
     {
-        throw new NotImplementedException();
-    }
+        Menus =
+        [
+            new MenuBarItem("_Garage",
+            [
+                new MenuItem("_Add vehicle", "", ShowAddDialog),
+                new MenuItem("_Remove selected", "", ShowAddDialog),
+                null!,
+                new MenuItem("_Quit", "", RequestStop),
+            ]),
+            new MenuBarItem("_Search",
+            [
+                new MenuItem("By _registration", "", ShowSearchDialog),
+                new MenuItem("By _properties", "", ShowFilterDialog),
+            ]),
+        ]
+    };
 
     private void ShowAddDialog()
     {
