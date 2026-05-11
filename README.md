@@ -27,7 +27,7 @@ The first run restores packages and compiles; subsequent runs boot in a couple o
 
 ```
 ┌─ Garage   Search ────────────────────────────────┐ ← menu bar
-│ GARAGE Project v1.0 — 11/15 spaces used         │ ← title  (used / capacity)
+│ GARAGE Project v1.0 — 11/15 spaces used          │ ← title  (used / capacity)
 │ Reg. No   Type        Color     Wheels           │
 │ ABC123    Car         Red       4                │ ← vehicle table
 │ DEF456    Car         Green     4                │   (one row per parked vehicle)
