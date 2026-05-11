@@ -51,6 +51,9 @@ public class GarageHandler
     {
         try
         {
+            var dir = Path.GetDirectoryName(path);
+            if (!string.IsNullOrEmpty(dir)) Directory.CreateDirectory(dir);
+
             var state = new GarageState(Capacity, GetAll().ToList());
             File.WriteAllText(path, JsonSerializer.Serialize(state, JsonOptions));
             return null;

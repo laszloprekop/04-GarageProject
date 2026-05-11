@@ -52,6 +52,8 @@ public class GarageApp : Window
             new Shortcut(Key.F4, "Unpark", RemoveSelected),
             new Shortcut(Key.F5, "Search", ShowSearchDialog),
             new Shortcut(Key.F6, "Filter", ShowFilterDialog),
+            new Shortcut(Key.F7, "Load", ShowLoad),
+            new Shortcut(Key.F8, "Save", ShowSave),
             new Shortcut(Key.F10, "Quit", RequestStop),
         ]
     );
@@ -111,7 +113,9 @@ public class GarageApp : Window
         ]
     };
 
-    private const string DefaultGarageFile = "garage.json";
+    private static readonly string DefaultGarageFile = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        "GarageProject", "garage.json");
 
     private void ShowSave()
     {
