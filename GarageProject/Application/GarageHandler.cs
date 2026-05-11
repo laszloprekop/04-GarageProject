@@ -1,6 +1,9 @@
+using System.Text.Json;
 using GarageProject.Domain;
 
 namespace GarageProject.Application;
+
+public record GarageState(int Capacity, IEnumerable<Vehicle> Vehicles);
 
 public class GarageHandler
 {
@@ -40,5 +43,39 @@ public class GarageHandler
         ParkVehicle(new Airplane("KLM098", "White", 8, 4, FuelType.Hybrid));
         ParkVehicle(new Boat("JKL321", "White", 4, 5));
         ParkVehicle(new Boat("VWX567", "Orange", 4, 12));
+    }
+
+    private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
+
+    public string? SaveToFile(string path)
+    {
+        try
+        {
+            var state = new GarageState(Capacity, GetAll().ToList());
+            File.WriteAllText(path, JsonSerializer.Serialize(state, JsonOptions));
+            return null;
+        }
+        catch (Exception e)
+        {
+            return e.Message;
+        }
+    }
+
+    public string? LoadFromFile(string path)
+    {
+        try
+        {
+            if (!File.Exists(path)) return $"File not found: {path}";
+            var state = JsonSerializer.Deserialize<GarageState>(File.ReadAllText(path), JsonOptions);
+            if (state is null) return "Invalid or empty JSON";
+
+            CreateGarage(state.Capacity);
+            foreach (var vehicle in state.Vehicles) ParkVehicle(vehicle);
+            return null;
+        }
+        catch (Exception e)
+        {
+            return e.Message;
+        }
     }
 }
