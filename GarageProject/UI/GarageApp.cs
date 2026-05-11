@@ -111,14 +111,24 @@ public class GarageApp : Window
         ]
     };
 
+    private const string DefaultGarageFile = "garage.json";
+
     private void ShowSave()
     {
-        throw new NotImplementedException();
+        var error = _garageHandler.SaveToFile(DefaultGarageFile);
+        if (error is not null)
+            MessageBox.ErrorQuery(App!, "Save failed", error, "_OK");
     }
 
     private void ShowLoad()
     {
-        throw new NotImplementedException();
+        var error = _garageHandler.LoadFromFile(DefaultGarageFile);
+        if (error is not null)
+            MessageBox.ErrorQuery(App!, "Load failed", error, "_OK");
+        else
+        {
+            RefreshTable();
+        }
     }
 
     private void ShowCreateGarageDialog()
