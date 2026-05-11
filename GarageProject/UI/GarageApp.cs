@@ -56,36 +56,6 @@ public class GarageApp : Window
         ]
     );
 
-    protected override bool OnKeyDown(Key key)
-    {
-        if (key == Key.N.WithCtrl)
-        {
-            ShowAddDialog();
-            return true;
-        }
-
-        if (key == Key.D.WithCtrl)
-        {
-            RemoveSelected();
-            return true;
-        }
-
-        if (key == Key.F.WithCtrl)
-        {
-            ShowFilterDialog();
-            return true;
-        }
-
-        if (key == Key.Q.WithCtrl)
-        {
-            RequestStop();
-            return true;
-        }
-
-        return base.OnKeyDown(key);
-    }
-
-
     private View BuildStatusLine()
     {
         _statusLabel = new Label { X = 0, Y = Pos.AnchorEnd(2), Width = Dim.Fill() };
@@ -124,15 +94,15 @@ public class GarageApp : Window
         [
             new MenuBarItem("_Garage",
             [
-                new MenuItem("_Add vehicle", "", ShowAddDialog),
-                new MenuItem("_Remove selected", "", RemoveSelected),
+                new MenuItem("_Add vehicle", "^N", ShowAddDialog, Key.N.WithCtrl),
+                new MenuItem("_Remove selected", "^D", RemoveSelected, Key.D.WithCtrl),
                 null!,
-                new MenuItem("_Quit", "", RequestStop),
+                new MenuItem("_Quit", "^Q", RequestStop, Key.Q.WithCtrl),
             ]),
             new MenuBarItem("_Search",
             [
                 new MenuItem("By _registration", "", ShowSearchDialog),
-                new MenuItem("By _properties", "", ShowFilterDialog),
+                new MenuItem("By _properties", "^F", ShowFilterDialog, Key.F.WithCtrl),
             ]),
         ]
     };
