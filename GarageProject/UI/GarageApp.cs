@@ -99,6 +99,8 @@ public class GarageApp : Window
                 new MenuItem("Vehicle _Types", "^V", ShowTypeSummary),
                 new MenuItem("Reset _Garage", "^G", ShowCreateGarageDialog, Key.G.WithCtrl),
                 null!,
+                new MenuItem("_Save", "^S", ShowSave, Key.S.WithCtrl),
+                new MenuItem("_Load", "^L", ShowLoad, Key.L.WithCtrl),
                 new MenuItem("_Quit", "^Q", RequestStop, Key.Q.WithCtrl),
             ]),
             new MenuBarItem("_Search",
@@ -108,6 +110,16 @@ public class GarageApp : Window
             ]),
         ]
     };
+
+    private void ShowSave()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ShowLoad()
+    {
+        throw new NotImplementedException();
+    }
 
     private void ShowCreateGarageDialog()
     {
