@@ -1,3 +1,4 @@
+using System.Data;
 using GarageProject.Application;
 using Terminal.Gui.Input;
 using Terminal.Gui.ViewBase;
@@ -40,6 +41,37 @@ public class FilterDialog : Dialog
 
     protected override bool OnAccepting(CommandEventArgs args)
     {
-        throw new NotImplementedException();
+        View? src = null;
+        args.Context?.Source?.TryGetTarget(out src);
+        if (src == _cancelButton) return base.OnAccepting(args);
+        var type = _typeField.Text?.Trim();
+        var color = _colorField.Text?.Trim();
+
+        int? minWheels = null;
+        var wheelsText = _wheelsField.Text?.Trim();
+        if (!string.IsNullOrEmpty(wheelsText))
+        {
+            if (!int.TryParse(wheelsText, out var parsed) || parsed < 0)
+            {
+                _errorLabel.Text = parsed < 0 ? "Wheels cannot be negative." : "Wheels must be a whole number.";
+                _errorLabel.SetNeedsDraw();
+                return true;
+            }
+            minWheels = parsed;
+        }
+
+        var results = _garageHandler.Filter(type, color, minWheels).ToList();
+        var dt = new DataTable();
+        dt.Columns.Add("Reg. no");
+        dt.Columns.Add("type");
+        dt.Columns.Add("Color");
+        dt.Columns.Add("Wheels");
+
+        foreach (var vehicle in results)
+            dt.Rows.Add(vehicle.RegistrationNumber, vehicle.GetType().Name, vehicle.Color, vehicle.NumberOfWheels);
+
+        RequestStop();
+        App!.Run(new ResultsDialog($"Filter results - {results.Count} found", dt), ex => false);
+        return true;
     }
 };
