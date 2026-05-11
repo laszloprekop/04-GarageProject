@@ -94,8 +94,10 @@ public class GarageApp : Window
         [
             new MenuBarItem("_Garage",
             [
-                new MenuItem("_Add vehicle", "^N", ShowAddDialog, Key.N.WithCtrl),
-                new MenuItem("_Remove selected", "^D", RemoveSelected, Key.D.WithCtrl),
+                new MenuItem("Add Vehicle", "^V", ShowAddDialog, Key.V.WithCtrl),
+                new MenuItem("_Remove selected", "^R", RemoveSelected, Key.R.WithCtrl),
+                new MenuItem("Vehicle _Types", "^V", ShowTypeSummary),
+                new MenuItem("Reset _Garage", "^G", ShowCreateGarageDialog, Key.G.WithCtrl),
                 null!,
                 new MenuItem("_Quit", "^Q", RequestStop, Key.Q.WithCtrl),
             ]),
@@ -106,6 +108,24 @@ public class GarageApp : Window
             ]),
         ]
     };
+
+    private void ShowCreateGarageDialog()
+    {
+        App!.Run(new CreateGarageDialog(_garageHandler, () =>
+        {
+            _garageHandler.Populate();
+            RefreshTable();
+        }), _ => false);
+    }
+
+
+    private void ShowTypeSummary()
+    {
+        var summary = _garageHandler.GetByType()
+            .Select(g => $"{g.Key,-14} {g.Count()}")
+            .Aggregate("Type         Count\n------------------\n", (acc, l) => acc + l + "\n");
+        MessageBox.Query(App!, "Vehicle Types", summary, "_OK");
+    }
 
     private void ShowAddDialog()
     {

@@ -17,16 +17,16 @@ public class CreateGarageDialog : Dialog
     {
         _handler = handler;
         _onCreated = onCreated;
-        Title = "Create Garage";
+        Title = @"Create\Reset Garage";
         Width = 40;
         Height = 9;
 
-        Add(new Label { Text = "Capacity: (number of Spaces", X = 2, Y = 1 });
+        Add(new Label { Text = "Capacity: (number of Spaces)", X = 2, Y = 1 });
         _capacityField = new TextField { X = 2, Y = 3, Width = 10, Text = "15" };
         _errorLabel = new Label { X = 2, Y = 5, Width = Dim.Fill(2), SchemeName = "Error" };
 
-        var okButton = new Button { Text = "_Create", X = Pos.Center() - 7, Y = Pos.AnchorEnd(1) };
-        _cancelButton = new Button { Text = "_Cancel", X = Pos.Center() + 2, Y = Pos.AnchorEnd(1) };
+        var okButton = new Button { Text = "_Create", X = Pos.Center() - 5, Y = Pos.AnchorEnd(1) };
+        _cancelButton = new Button { Text = "_Cancel", X = Pos.Center() + 5, Y = Pos.AnchorEnd(1) };
         _cancelButton.Accepted += (_, _) => RequestStop();
 
         Add(_capacityField, _errorLabel, okButton, _cancelButton);
