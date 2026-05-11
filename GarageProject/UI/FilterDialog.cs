@@ -44,11 +44,11 @@ public class FilterDialog : Dialog
         args.Context?.Source?.TryGetTarget(out src);
         if (src == _cancelButton) return base.OnAccepting(args);
 
-        var type  = _typeField.Text?.Trim();
-        var color = _colorField.Text?.Trim();
+        var type  = _typeField.Text.Trim();
+        var color = _colorField.Text.Trim();
 
         int? minWheels = null;
-        var wheelsText = _wheelsField.Text?.Trim();
+        var wheelsText = _wheelsField.Text.Trim();
         if (!string.IsNullOrEmpty(wheelsText))
         {
             if (!int.TryParse(wheelsText, out var parsed) || parsed < 0)
@@ -71,7 +71,7 @@ public class FilterDialog : Dialog
             dt.Rows.Add(vehicle.RegistrationNumber, vehicle.GetType().Name, vehicle.Color, vehicle.NumberOfWheels);
 
         RequestStop();
-        App!.Run(new ResultsDialog($"Filter results — {results.Count} found", dt), ex => false);
+        App!.Run(new ResultsDialog($"Filter results — {results.Count} found", dt), _ => false);
         return true;
     }
 }
