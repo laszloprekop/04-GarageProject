@@ -23,7 +23,7 @@ public class SearchDialog: Dialog
         Add(new Label { Text = "Registration Number (partial OK):", X = 2, Y = 1 });
         _registrationNumberField = new TextField { X = 2, Y = 3, Width = 30 };
 
-        var searchButton = new Button{Text = "_Search", X = Pos.Center() - 8, Y = Pos.AnchorEnd(1)};
+        var searchButton = new Button { Text = "_Search", IsDefault = true, X = Pos.Center() - 8, Y = Pos.AnchorEnd(1) };
 
         _cancelButton = new Button{Text = "_Cancel", X = Pos.Center() + 2, Y = Pos.AnchorEnd(1)};
         _cancelButton.Accepted += (_, _) => RequestStop();

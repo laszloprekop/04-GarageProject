@@ -47,7 +47,7 @@ public class AddVehicleDialog : Dialog
         _colorField  = new TextField { X = 2, Y = 8,  Width = 20 };
         _wheelsField = new TextField { X = 2, Y = 11, Width = 6 };
 
-        var okBtn = new Button { Text = "_OK", X = Pos.Center() - 7, Y = Pos.AnchorEnd(1) };
+        var okBtn = new Button { Text = "_OK", IsDefault = true, X = Pos.Center() - 7, Y = Pos.AnchorEnd(1) };
 
         _cancelBtn = new Button { Text = "_Cancel", X = Pos.Center() + 2, Y = Pos.AnchorEnd(1) };
         _cancelBtn.Accepted += (_, _) => RequestStop();
