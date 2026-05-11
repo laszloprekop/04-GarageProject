@@ -124,7 +124,7 @@ public class GarageApp : Window
 
     private void ShowSearchDialog()
     {
-        throw new NotImplementedException();
+        App!.Run(new SearchDialog(_garageHandler), ex => false);
     }
 
     private void ShowFilterDialog()
