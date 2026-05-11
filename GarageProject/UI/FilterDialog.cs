@@ -22,18 +22,17 @@ public class FilterDialog : Dialog
         Width = 46;
         Height = 16;
 
+        Add(new Label { Text = "Type (blank = any):",      X = 2, Y = 1 });
+        Add(new Label { Text = "Color (blank = any):",     X = 2, Y = 4 });
+        Add(new Label { Text = "Min. wheels (blank = any):", X = 2, Y = 7 });
 
-        Add(new Label { Text = "Type (blank = any):", X = 2, Y = 1 });
-        Add(new Label { Text = "Color (blank = any):", X = 2, Y = 4 });
-        Add(new Label { Text = "Min. wheels:", X = 2, Y = 7 });
-
-        _typeField = new TextField { X = 2, Y = 2, Width = Dim.Fill() };
-        _colorField = new TextField { X = 2, Y = 5, Width = Dim.Fill() };
+        _typeField   = new TextField { X = 2, Y = 2, Width = Dim.Fill() };
+        _colorField  = new TextField { X = 2, Y = 5, Width = Dim.Fill() };
         _wheelsField = new TextField { X = 2, Y = 8, Width = Dim.Fill() };
-        _errorLabel = new Label { Text = "", X = 2, Y = 10, Width = Dim.Fill(2), SchemeName = "Error" };
+        _errorLabel  = new Label { Text = "", X = 2, Y = 10, Width = Dim.Fill(2), SchemeName = "Error" };
 
-        var filterButton = new Button { Text = "_Filter", X = Pos.Center() - 8, Y = Pos.AnchorEnd(1) };
-        _cancelButton = new Button { Text = "_Cancel", X = Pos.Center() + 2, Y = Pos.AnchorEnd(1) };
+        var filterButton = new Button { Text = "_Filter", IsDefault = true, X = Pos.Center() - 8, Y = Pos.AnchorEnd(1) };
+        _cancelButton    = new Button { Text = "_Cancel",                   X = Pos.Center() + 2, Y = Pos.AnchorEnd(1) };
         _cancelButton.Accepted += (_, _) => RequestStop();
 
         Add(_typeField, _colorField, _wheelsField, _errorLabel, filterButton, _cancelButton);
@@ -44,7 +43,8 @@ public class FilterDialog : Dialog
         View? src = null;
         args.Context?.Source?.TryGetTarget(out src);
         if (src == _cancelButton) return base.OnAccepting(args);
-        var type = _typeField.Text?.Trim();
+
+        var type  = _typeField.Text?.Trim();
         var color = _colorField.Text?.Trim();
 
         int? minWheels = null;
@@ -63,7 +63,7 @@ public class FilterDialog : Dialog
         var results = _garageHandler.Filter(type, color, minWheels).ToList();
         var dt = new DataTable();
         dt.Columns.Add("Reg. no");
-        dt.Columns.Add("type");
+        dt.Columns.Add("Type");
         dt.Columns.Add("Color");
         dt.Columns.Add("Wheels");
 
@@ -71,7 +71,7 @@ public class FilterDialog : Dialog
             dt.Rows.Add(vehicle.RegistrationNumber, vehicle.GetType().Name, vehicle.Color, vehicle.NumberOfWheels);
 
         RequestStop();
-        App!.Run(new ResultsDialog($"Filter results - {results.Count} found", dt), ex => false);
+        App!.Run(new ResultsDialog($"Filter results — {results.Count} found", dt), ex => false);
         return true;
     }
-};
+}
