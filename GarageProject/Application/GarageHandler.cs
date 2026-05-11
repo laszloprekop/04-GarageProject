@@ -21,9 +21,6 @@ public class GarageHandler
     public IEnumerable<IGrouping<string, Vehicle>> GetByType() =>
         GetAll().GroupBy(v => v.GetType().Name);
 
-    public Vehicle? FindByRegistrationNumber(string registrationNumber) =>
-        _garage?.Find(registrationNumber);
-
     public IEnumerable<Vehicle> Filter(string? type, string? color, int? minWheels) =>
         GetAll().Where(v =>
             (string.IsNullOrEmpty(type) || v.GetType().Name.Equals(type, StringComparison.OrdinalIgnoreCase)) &&
