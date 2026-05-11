@@ -53,6 +53,7 @@ public class GarageApp : Window
             new Shortcut(Key.F3,  "Park",   ShowAddDialog),
             new Shortcut(Key.F4,  "Unpark", RemoveSelected),
             new Shortcut(Key.F5,  "Search", ShowSearchDialog),
+            new Shortcut(Key.F6,  "Filter", ShowFilterDialog),
             new Shortcut(Key.F10, "Quit",   RequestStop),
         ]
     );
@@ -61,6 +62,7 @@ public class GarageApp : Window
     {
         if (key == Key.N.WithCtrl) { ShowAddDialog();   return true; }
         if (key == Key.D.WithCtrl) { RemoveSelected();  return true; }
+        if (key == Key.F.WithCtrl) { ShowFilterDialog(); return true; }
         if (key == Key.Q.WithCtrl) { RequestStop();     return true; }
         return base.OnKeyDown(key);
     }
@@ -104,7 +106,7 @@ public class GarageApp : Window
             new MenuBarItem("_Garage",
             [
                 new MenuItem("_Add vehicle", "", ShowAddDialog),
-                new MenuItem("_Remove selected", "", ShowAddDialog),
+                new MenuItem("_Remove selected", "", RemoveSelected),
                 null!,
                 new MenuItem("_Quit", "", RequestStop),
             ]),
@@ -129,7 +131,7 @@ public class GarageApp : Window
 
     private void ShowFilterDialog()
     {
-        throw new NotImplementedException();
+        App!.Run(new FilterDialog(_garageHandler), ex => false);
     }
 
     private void RemoveSelected()
