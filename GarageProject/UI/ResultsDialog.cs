@@ -19,6 +19,10 @@ public class ResultsDialog : Dialog
             Height = Dim.Fill(2),
             FullRowSelect = true,
         };
+        table.Style.ShowHorizontalHeaderOverline = true;
+        table.Style.ShowHorizontalHeaderUnderline = true;
+        table.Style.ShowHorizontalBottomLine = true;
+        table.Style.ShowVerticalCellLines = true;
         table.Table = new DataTableSource(results);
 
         var closeButton = new Button
