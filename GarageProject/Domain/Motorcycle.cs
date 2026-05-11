@@ -2,12 +2,14 @@ namespace GarageProject.Domain;
 
 public class Motorcycle : Vehicle
 {
+    public FuelType FuelType { get; set; }
     public double CylinderVolume { get; set; }
 
-    public Motorcycle(string registrationNumber, string color, int numberOfWheels, FuelType FuelType,
+    public Motorcycle(string registrationNumber, string color, int numberOfWheels, FuelType fuelType,
         double cylinderVolume) : base(
         registrationNumber, color, numberOfWheels)
     {
-        this.CylinderVolume = cylinderVolume;
+        FuelType = fuelType;
+        CylinderVolume = cylinderVolume;
     }
 }

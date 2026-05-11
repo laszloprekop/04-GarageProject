@@ -113,9 +113,15 @@ public class GarageApp : Window
         ]
     };
 
-    private static readonly string DefaultGarageFile = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "GarageProject", "garage.json");
+    private static readonly string DefaultGarageFile = Path.Combine(FindProjectRoot(), "garage.json");
+
+    private static string FindProjectRoot()
+    {
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        while (dir is not null && !dir.GetFiles("*.csproj").Any())
+            dir = dir.Parent;
+        return dir?.FullName ?? AppContext.BaseDirectory;
+    }
 
     private void ShowSave()
     {
